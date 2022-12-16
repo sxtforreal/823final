@@ -1,17 +1,14 @@
 ### Abstract
 
 This report is an attempt of implementing RegNet on the STL10 dataset[1]. 
-RegNet is originally proposed in <RegNet:Self-regulated network for Image Classification>[2]. The main idea is to insert regulator modules (convolutional RNNs) into ResNet architecture, in order to better extract spatio-temporal information and improve the performance on image classification tasks.
+RegNet is originally proposed in <RegNet:Self-regulated network for Image Classification>[2]. The main idea is to insert regulator modules (convolutional RNNs) into ResNet architecture, in order to better extract spatio-temporal information and improve the performance on image classification tasks. The model is built with PyTorch library.
 
 ### Introduction
 
-ResNet is one of the most outstanding architectures in the field of image classification. In the past, neural networks with deep layers do not guarantee better results. This is because the propagation between layers comes with inevitable loss of information and thus making identical mapping between layers impossible. ResNet solves this issue by manually passing the input to the output via 'shortcuts' and this forces the model to learn residuals instead. With ResNet, deep networks has a great chance of outperforming shallow networks because more layer means more complex features being extracted and learned.
-
-'However, the shortcut connection mechanism makes each block focus on learning its respective residual output, where the inner block information communication is somehow ignored and some reusable information learned from previous blocks tends to be forgotten in later blocks.'(Xu et al., 2022). 
-
-The authors of RegNet argues that ResNet is not effectively learning because the 'shortcut' connection leads to very similar learned features between adjacent layers. Their solution is to have regulator modules in parallel with the ResNet design. Regulators are convolutional RNNs, so they use a memory mechanism to store and pass on the complementary spatio-temporal information from one layer to the other.
-
-In their paper, the result shows that RegNet is able to achieve the same performance as ResNet in a less computationally expensive manner. In this report, we are interested in RegNet's performance on STL10 dataset.
+ResNet is one of the most outstanding architectures in the field of image classification. In the past, neural networks with deep layers do not guarantee better results. This is because the propagation between layers comes with inevitable loss of information and thus making identical mapping between layers impossible. ResNet solves this issue by manually passing through the input and adding up with the output via 'shortcuts' and this forces the model to learn residuals instead. With ResNet, deep networks has a great chance of outperforming shallow networks because more layer enables more complex features being extracted and learned.
+'However, the shortcut connection mechanism makes each block focus on learning its respective residual output, where the inner block information communication is somehow ignored and some reusable information learned from previous blocks tends to be forgotten in later blocks.'(Xu et al., 2022).
+The authors of RegNet argues that ResNet is not effectively learning because the 'shortcut' connection leads to very similar learned features between adjacent layers. Their solution is to have regulator modules in parallel with the ResNet design. The chosen design of the regulators are convolutional RNNs,  convolutional RNNs use a memory mechanism to store and pass on the complementary spatio-temporal information from one layer to the other.
+In their paper, the result shows that RegNet is able to achieve the same performance as ResNet in a less computationally expensive manner. In this report, we are interested in RegNet's performance on the STL10 dataset.
 
 
 ### Method
